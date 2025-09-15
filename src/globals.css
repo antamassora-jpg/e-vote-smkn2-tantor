@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 262 84% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 262 84% 60%;
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #1a237e 0%, #3949ab 50%, #764ba2 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .holographic-bg {
+        background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b, #ff006e);
+        background-size: 400% 400%;
+        animation: holographic 4s ease-in-out infinite;
+    }
+    
+    .card-3d {
+        transform-style: preserve-3d;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+    
+    .card-3d:hover {
+        transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    }
+
+    .neon-glow {
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.6), 0 0 40px rgba(102, 126, 234, 0.4);
+        animation: neonPulse 2s ease-in-out infinite alternate;
+    }
+
+    .ai-thinking {
+        animation: aiThink 2s ease-in-out infinite;
+    }
+
+    .blockchain-verified {
+        background: linear-gradient(45deg, #00d4aa, #00d4aa, #ffffff, #00d4aa, #00d4aa);
+        background-size: 200% 200%;
+        animation: blockchainPulse 3s ease-in-out infinite;
+    }
+
+    .floating-3d {
+        animation: floating3d 6s ease-in-out infinite;
+    }
+
+    .biometric-scan {
+        animation: biometricScan 2s ease-in-out infinite;
+    }
+
+    .quantum-effect {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .quantum-effect::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(from 0deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+        animation: quantumSpin 4s linear infinite;
+    }
+
+    .modal-advanced {
+      backdrop-filter: blur(20px);
+      background: rgba(0, 0, 0, 0.8);
+    }
+    
+    .modal-content-advanced {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+}
+
+@keyframes holographic {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes neonPulse {
+    from { box-shadow: 0 0 20px rgba(102, 126, 234, 0.6), 0 0 40px rgba(102, 126, 234, 0.4); }
+    to { box-shadow: 0 0 30px rgba(102, 126, 234, 0.8), 0 0 60px rgba(102, 126, 234, 0.6); }
+}
+
+@keyframes floating3d {
+    0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+    33% { transform: translateY(-20px) rotateZ(1deg); }
+    66% { transform: translateY(-10px) rotateZ(-1deg); }
+}
+
+@keyframes aiThink {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes blockchainPulse {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes quantumSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes biometricScan {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+    50% { box-shadow: 0 0 0 20px rgba(102, 126, 234, 0); }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+  .no-print {
+    display: none;
+  }
+  .print-container {
+    padding: 0;
+    margin: 0;
+  }
+  main {
+    padding: 0 !important;
+  }
+  .md\:pl-64 {
+    padding-left: 0 !important;
+  }
+  .print-container .card {
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+  }
+}
