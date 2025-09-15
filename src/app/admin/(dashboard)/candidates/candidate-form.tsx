@@ -38,7 +38,7 @@ interface CandidateFormProps {
 
 const parsePlatform = (platform: string | undefined) => {
     if (!platform) return { vision: '', mission: '' };
-    // Updated regex to be compatible with ES2017 by replacing /s flag
+    // Use [\s\S] to be compatible with older JS targets
     const visiMatch = platform.match(/Visi:([\s\S]*?)(?=Misi:|$)/);
     const misiMatch = platform.match(/Misi:([\s\S]*)/);
     const vision = visiMatch ? visiMatch[1].trim() : platform;

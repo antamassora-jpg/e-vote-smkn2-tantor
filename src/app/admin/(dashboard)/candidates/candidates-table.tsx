@@ -101,8 +101,8 @@ export function CandidatesTable({ initialCandidates }: { initialCandidates: Cand
 
     const handleExport = () => {
         const parsePlatform = (platform: string) => {
-            const visiMatch = platform.match(/Visi:(.*?)(?=Misi:|$)/s);
-            const misiMatch = platform.match(/Misi:(.*)/s);
+            const visiMatch = platform.match(/Visi:([\s\S]*?)(?=Misi:|$)/);
+            const misiMatch = platform.match(/Misi:([\s\S]*)/);
             const vision = visiMatch ? visiMatch[1].trim() : platform;
             let mission = misiMatch ? misiMatch[1].trim().replace(/^- /gm, '') : '';
             return { vision, mission };
