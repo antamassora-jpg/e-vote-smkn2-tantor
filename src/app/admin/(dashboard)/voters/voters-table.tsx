@@ -82,7 +82,7 @@ export function VotersTable({ initialVoters }: { initialVoters: Voter[] }) {
                 // Assume header is the first row
                 const dataRows = json.slice(1);
 
-                const imported: Voter[] = dataRows.map((row: any) => {
+                const mappedVoters = dataRows.map((row: any) => {
                     if (!row || row.length < 3) return null;
                     
                     const nis = String(row[0]);
@@ -102,7 +102,9 @@ export function VotersTable({ initialVoters }: { initialVoters: Voter[] }) {
                         };
                     }
                     return null;
-                }).filter((v): v is Voter => v !== null);
+                });
+                
+                const imported: Voter[] = mappedVoters.filter((v): v is Voter => v !== null);
 
                 if (imported.length === 0) {
                      toast({ 
@@ -257,3 +259,5 @@ export function VotersTable({ initialVoters }: { initialVoters: Voter[] }) {
         </Card>
     );
 }
+
+    
