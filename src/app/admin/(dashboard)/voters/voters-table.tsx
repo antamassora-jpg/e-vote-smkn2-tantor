@@ -79,19 +79,23 @@ export function VotersTable({ initialVoters }: { initialVoters: Voter[] }) {
                     return;
                 }
 
-                // Assume header is the first row
+                // Assume header is the first row, slice to get data rows
                 const dataRows = json.slice(1);
 
-                const imported = dataRows.map((row: any) => {
-                    if (!row || row.length < 3) return null;
+                // Use reduce to build the imported voters array, ensuring no nulls
+                const imported: Voter[] = dataRows.reduce((acc: Voter[], row: any) => {
+                    if (!row || row.length < 3) {
+                        return acc; // Skip empty or invalid rows
+                    }
                     
-                    const nis = String(row[0]);
-                    const name = String(row[1]);
-                    const klass = String(row[2]);
-                    const password = row[3] ? String(row[3]) : nis;
+                    const nis = String(row[0] || '');
+                    const name = String(row[1] || '');
+                    const klass = String(row[2] || '');
 
+                    // Only add if essential data is present
                     if (nis && name && klass) {
-                        return { 
+                        const password = row[3] ? String(row[3]) : nis; // Default password to NIS if not provided
+                        acc.push({ 
                             nis, 
                             name, 
                             class: klass, 
@@ -99,10 +103,11 @@ export function VotersTable({ initialVoters }: { initialVoters: Voter[] }) {
                             hasVoted: false,
                             voteTime: null,
                             votedFor: null,
-                        };
+                        });
                     }
-                    return null;
-                }).filter((v): v is Voter => v !== null);
+                    return acc;
+                }, []);
+
 
                 if (imported.length === 0) {
                      toast({ 
